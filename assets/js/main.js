@@ -20,8 +20,8 @@ let data = [
     {
         url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/467a486b-be3a-4183-90ed-dd6867d5852d.jpg",
         question: "True or False: Iceland is covered in ice.",
-        choice: [true, false],
-        answer: false
+        choice: ["true", "false"],
+        answer: "false"
     },
     {
         url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/ecf8af7b-8541-4572-b63b-ee7d7f9fc4cc.jpg",
@@ -133,7 +133,7 @@ function createNewQuestions(object) {
 
                 // Am Ende: Wie viele richtige und falsche Antworten
             } else {
-                pAnswer.textContent = `${winCounter} richige und  ${looseCounter} falsche.`
+                pAnswer.textContent = `${winCounter} correct and  ${looseCounter} wrong answers.`
             }
 
         })
@@ -141,65 +141,6 @@ function createNewQuestions(object) {
     })
 }
 
-
-
 let objectPosition = 0;
 createNewQuestions(objectPosition);
 console.log(objectPosition);
-
-
-
-//Jedes Bild aus den Objekten holen und ins div packen
-// data.forEach(object => {
-
-
-
-
-
-//     // console.log(object);
-//     //Neues <img> Element erstellen und in das <div> packen für die Bilder
-//     let newImgEl = document.createElement("img");
-//     newImgEl.src = object.url;
-//     divEl.appendChild(newImgEl);
-
-//     //Neues <p> Element erstellen und in das <div> packen für die Fragen
-//     let newP = document.createElement("p");
-//     newP.textContent = object.question;
-//     divEl.appendChild(newP);
-
-//     // Die <button> kommen in ein eigenes neues <div>
-//     let divButton = document.createElement("div");
-//     divEl.appendChild(divButton);
-
-//     //Alle Antwortmöglichkeiten (Es ist jeweils ein Array)
-//     let allChoices = object.choice;
-
-//     //Vom Array jeden einzelnen Antwortmöglichkeiten Wert in einen neuen <button> packen
-//     allChoices.forEach(choise => {
-//         let newButton = document.createElement("button");
-//         newButton.textContent = choise;
-//         divButton.appendChild(newButton);
-
-//         // Wenn der gedrückte Knopf die richtige oder falsche Antwort ist
-//         newButton.addEventListener("click", () => {
-//             if (newButton.textContent === theAnswer) {
-//                 newButton.style.backgroundColor = "green";
-//                 console.log("Richtig");
-//             } else {
-//                 newButton.style.backgroundColor = "red";
-//                 console.log("falsch");
-//             }
-
-
-
-//         })
-
-//     });
-// });
-
-// // ==========================================================
-// //         Logik vom Quiz
-// // ==========================================================
-
-// //Welcher Knopf wurde ausgewählt?
-
