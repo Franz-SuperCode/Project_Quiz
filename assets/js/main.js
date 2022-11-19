@@ -66,38 +66,33 @@ let data = [
 // ==========================================================
 
 let divEl = document.querySelector("#content");
-
-//Neues <img> Element erstellen und in das <div> packen
-let newImgEl = document.createElement("img");
-let image1 = data[0].url;
-
-newImgEl.src = image1;
-
-//Jedes Bild aus den Objekten holen und ins div packen
-data.forEach(object => {
-
-    // Hole die richtige Antwort
-    let theAnswer = object.answer;
+let winCounter = 0;
+let looseCounter = 0;
 
 
+function createNewQuestions(object) {
 
-    // console.log(object);
-    //Neues <img> Element erstellen und in das <div> packen für die Bilder
+    console.log(divEl);
+    //Neues <img> Element erstellen und in das <div> packen
     let newImgEl = document.createElement("img");
-    newImgEl.src = object.url;
+    newImgEl.src = data[object].url;
     divEl.appendChild(newImgEl);
 
     //Neues <p> Element erstellen und in das <div> packen für die Fragen
     let newP = document.createElement("p");
-    newP.textContent = object.question;
+    newP.textContent = data[object].question;
+
     divEl.appendChild(newP);
 
-    // Die <button> kommen in ein eigenes neues <div>
     let divButton = document.createElement("div");
     divEl.appendChild(divButton);
 
     //Alle Antwortmöglichkeiten (Es ist jeweils ein Array)
-    let allChoices = object.choice;
+    let allChoices = data[object].choice;
+    console.log(allChoices);
+
+    // Hole die richtige Antwort
+    let theAnswer = data[object].answer;
 
     //Vom Array jeden einzelnen Antwortmöglichkeiten Wert in einen neuen <button> packen
     allChoices.forEach(choise => {
@@ -105,26 +100,106 @@ data.forEach(object => {
         newButton.textContent = choise;
         divButton.appendChild(newButton);
 
-        // Wenn der gedrückte Knopf die richtige oder falsche Antwort ist
+
         newButton.addEventListener("click", () => {
+            let pAnswer = document.createElement("p");
+
+            //Bedingungen für richtige & falsche Antworten
+
+            console.log(object);
             if (newButton.textContent === theAnswer) {
                 newButton.style.backgroundColor = "green";
                 console.log("Richtig");
+                pAnswer.textContent = "Richtig!"
+                winCounter++;
+
             } else {
                 newButton.style.backgroundColor = "red";
                 console.log("falsch");
+                pAnswer.textContent = "Falsch!"
+                looseCounter++;
             }
 
 
+            divEl.appendChild(pAnswer);
+            //Sobald alle Objekte im Quiz abgefragt wurden, soll er das nicht mehr ausführen (Es sind 10 Objekte)
+            if (object < 9) {
+                setTimeout(() => {
+                    //setze alles zurück
+                    divEl.innerHTML = "";
+                    objectPosition++;
+                    createNewQuestions(objectPosition);
+                }, 1000);
+
+                // Am Ende: Wie viele richtige und falsche Antworten
+            } else {
+                pAnswer.textContent = `${winCounter} richige und  ${looseCounter} falsche.`
+            }
 
         })
 
-    });
-});
+    })
+}
 
-// ==========================================================
-//         Logik vom Quiz
-// ==========================================================
 
-//Welcher Knopf wurde ausgewählt?
+
+let objectPosition = 0;
+createNewQuestions(objectPosition);
+console.log(objectPosition);
+
+
+
+//Jedes Bild aus den Objekten holen und ins div packen
+// data.forEach(object => {
+
+
+
+
+
+//     // console.log(object);
+//     //Neues <img> Element erstellen und in das <div> packen für die Bilder
+//     let newImgEl = document.createElement("img");
+//     newImgEl.src = object.url;
+//     divEl.appendChild(newImgEl);
+
+//     //Neues <p> Element erstellen und in das <div> packen für die Fragen
+//     let newP = document.createElement("p");
+//     newP.textContent = object.question;
+//     divEl.appendChild(newP);
+
+//     // Die <button> kommen in ein eigenes neues <div>
+//     let divButton = document.createElement("div");
+//     divEl.appendChild(divButton);
+
+//     //Alle Antwortmöglichkeiten (Es ist jeweils ein Array)
+//     let allChoices = object.choice;
+
+//     //Vom Array jeden einzelnen Antwortmöglichkeiten Wert in einen neuen <button> packen
+//     allChoices.forEach(choise => {
+//         let newButton = document.createElement("button");
+//         newButton.textContent = choise;
+//         divButton.appendChild(newButton);
+
+//         // Wenn der gedrückte Knopf die richtige oder falsche Antwort ist
+//         newButton.addEventListener("click", () => {
+//             if (newButton.textContent === theAnswer) {
+//                 newButton.style.backgroundColor = "green";
+//                 console.log("Richtig");
+//             } else {
+//                 newButton.style.backgroundColor = "red";
+//                 console.log("falsch");
+//             }
+
+
+
+//         })
+
+//     });
+// });
+
+// // ==========================================================
+// //         Logik vom Quiz
+// // ==========================================================
+
+// //Welcher Knopf wurde ausgewählt?
 
