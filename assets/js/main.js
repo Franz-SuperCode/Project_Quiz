@@ -61,6 +61,10 @@ let data = [
     }
 ]
 
+// ==========================================================
+//         Neue Elemente erstellen und ins HTML schreiben
+// ==========================================================
+
 let divEl = document.querySelector("#content");
 
 //Neues <img> Element erstellen und in das <div> packen
@@ -71,6 +75,12 @@ newImgEl.src = image1;
 
 //Jedes Bild aus den Objekten holen und ins div packen
 data.forEach(object => {
+
+    // Hole die richtige Antwort
+    let theAnswer = object.answer;
+
+
+
     // console.log(object);
     //Neues <img> Element erstellen und in das <div> packen für die Bilder
     let newImgEl = document.createElement("img");
@@ -94,5 +104,27 @@ data.forEach(object => {
         let newButton = document.createElement("button");
         newButton.textContent = choise;
         divButton.appendChild(newButton);
+
+        // Wenn der gedrückte Knopf die richtige oder falsche Antwort ist
+        newButton.addEventListener("click", () => {
+            if (newButton.textContent === theAnswer) {
+                newButton.style.backgroundColor = "green";
+                console.log("Richtig");
+            } else {
+                newButton.style.backgroundColor = "red";
+                console.log("falsch");
+            }
+
+
+
+        })
+
     });
 });
+
+// ==========================================================
+//         Logik vom Quiz
+// ==========================================================
+
+//Welcher Knopf wurde ausgewählt?
+
