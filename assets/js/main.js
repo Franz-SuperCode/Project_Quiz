@@ -107,7 +107,7 @@ function createNewQuestions(object) {
             //Bedingungen für richtige & falsche Antworten
 
             console.log(object);
-            if (newButton.textContent === theAnswer) {
+            if (newButton.textContent == theAnswer) {
                 newButton.style.backgroundColor = "green";
                 console.log("Richtig");
                 pAnswer.textContent = "Richtig!"
